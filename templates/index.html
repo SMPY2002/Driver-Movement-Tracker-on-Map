@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Tracking Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <!-- Link to the CSS file from the static folder -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+  <!-- Navbar -->
+  <div class="navbar">
+    <i class="fas fa-bars menu-icon"></i>
+    <div class="title">Vehicle Tracking Dashboard</div>
+    <div class="actions">
+      <i class="fas fa-bell"></i>
+      <div class="profile"></div>
+    </div>
+  </div>
+
+  <!-- Enhanced Status Cards -->
+  <div class="status-cards">
+    <div class="status-card total">
+      <i class="fas fa-car"></i>
+      <button id="total-vehicles" class="stat-item">
+        <span>Total Vehicles:</span> <span id="total-count">0</span>
+      </button>
+    </div>
+    <div class="status-card moving">
+      <i class="fas fa-car-side"></i>
+      <button id="moving-vehicles" class="stat-item">
+        <span>Moving Vehicles:</span> <span id="moving-count">0</span>
+      </button>
+    </div>
+    <div class="status-card park">
+      <i class="fas fa-parking"></i>
+      <button id="free-vehicles" class="stat-item">
+        <span>Available/Free Vehicles:</span> <span id="free-count">0</span>
+      </button>
+    </div>
+    <div class="status-card idle">
+      <i class="fas fa-car-battery"></i>
+      <button id="idle-vehicles" class="stat-item">
+        <span>Idle Vehicles:</span> <span id="idle-count">0</span>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="tabs">
+        <button id="live-tab" class="tab-btn active">Live</button>
+        <button id="history-tab" class="tab-btn">History</button>
+      </div>
+
+      <!-- Live Section -->
+      <div id="live-section" class="sidebar-content">
+        <h3>Live Tracking</h3>
+        <div class="live-info">
+          <label for="vehicle-select">Vehicles</label>
+          <select id="vehicle-select">
+            <option value="">Select Vehicle</option>
+          </select>
+        </div>
+        <!-- Start Tracking Button in the Sidebar -->
+        <button id="start-tracking" class="tracking-button">Start Tracking</button>
+      </div>
+
+      <!-- History Section -->
+      <div id="history-section" class="sidebar-content hidden">
+        <h3>History</h3>
+        <div id="history-section">
+          <label for="vehicle-history">Select Vehicle:</label>
+          <select id="vehicle-history"></select>
+
+          <label for="ride-dropdown">Select Ride:</label>
+          <select id="ride-dropdown"></select>
+
+          <div id="ride-details">
+            <div>
+              <label for="from-box">From:</label>
+              <input id="from-box" type="text" readonly>
+            </div>
+            <div>
+              <label for="to-box">To:</label>
+              <input id="to-box" type="text" readonly>
+            </div>
+          </div>
+
+          <label for="filter-dropdown">Filter:</label>
+          <!-- Filter Dropdown (to select Ride or Break-points) -->
+          <select id="filter-dropdown">
+            <option value="ride">Ride</option>
+            <option value="break-points">Break-points</option>
+          </select>
+
+          <button id="show-history-btn">Show History</button>
+        </div>
+
+        <!-- <div class="history-item">
+          <span>Time Based</span>
+          <div class="status"></div>
+        </div> -->
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section">
+      <div id="map"></div>
+    </div>
+  </div>
+  <!-- Link to the JavaScript file from the static folder -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="/static/vehicles.json" type="application/json"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>
